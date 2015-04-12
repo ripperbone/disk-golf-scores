@@ -1,0 +1,17 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/displayPlayerScoresVerticalScroll"
+    	android:layout_height="match_parent"
+    	android:layout_width="match_parent"
+    	android:scrollbars="horizontal|vertical"
+    	android:scrollbarStyle="outsideInset"
+    	>
+
+    <TableLayout
+        android:id="@+id/playerScoresTable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:stretchColumns="0,1,2"> 
+        
+    </TableLayout>
+
+</ScrollView>

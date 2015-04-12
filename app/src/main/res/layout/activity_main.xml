@@ -1,0 +1,86 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp" >
+
+    <EditText
+        android:id="@+id/addPlayerField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/addPlayerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/addPlayerField"
+        android:layout_toRightOf="@+id/addPlayerField"
+        android:onClick="addPlayer"
+        android:text="@string/add_player_button" />
+
+    <Spinner
+        android:id="@+id/playerInputField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/addPlayerField"
+        android:layout_below="@+id/addPlayerField" />
+
+    <EditText
+        android:id="@+id/scoreInputField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/playerInputField"
+        android:layout_below="@+id/playerInputField"
+        android:layout_marginTop="18dp"
+        android:ems="4"
+        android:inputType="number" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/scoreInputButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/scoreInputField"
+        android:layout_below="@+id/scoreInputField"
+        android:layout_marginTop="35dp"
+        android:onClick="addScore"
+        android:text="@string/add_score_button"
+        android:focusable="false" />
+
+    <Button
+        android:id="@+id/newGameButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/displayPlayersScores"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_toRightOf="@+id/computeTotalButton"
+        android:onClick="newGame"
+        android:text="@string/new_game" />
+
+    <Button
+        android:id="@+id/computeTotalButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/newGameButton"
+        android:layout_alignBottom="@+id/newGameButton"
+        android:layout_alignLeft="@+id/scoreInputButton"
+        android:onClick="computeTotal"
+        android:text="@string/compute_total_button" />
+
+    <Button
+        android:id="@+id/displayPlayersScores"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="displayPlayerScores"
+        android:text="@string/see_players_scores"
+        android:layout_alignTop="@+id/scoreInputButton"
+        android:layout_alignLeft="@+id/newGameButton"
+        android:layout_alignStart="@+id/newGameButton" />
+
+</RelativeLayout>

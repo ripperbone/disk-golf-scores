@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+
+    <string name="app_name">Disk Golf Scores</string>
+    <string name="action_settings">Settings</string>
+
+
+
+    <!-- scores -->
+
+    <string name="add_score_button">Add Score</string>
+    <string name="remove_last_score_button">Remove Last Score</string>
+    <string name="score_input_label">Score</string>
+    <string name="clear_scores_button">Next Game</string>
+    <string name="title_activity_display_total_scores">Display Total Scores</string>
+    <string name="total_score">Score</string>
+    <string name="score_added">Score Added</string>
+    <string name="score_removed">Removing Last Score For Player</string>
+    <string name="title_activity_display_player_scores">Display Player Scores</string>
+    <string name="see_players_scores">See Player Scores</string>
+    <string name="score_too_big">Score Too Big</string>
+    <string name="no_score_provided">No Score Provided</string>
+
+    <!-- players -->
+
+    <string name="add_player_button">Add Player</string>
+    <string name="remove_player_button">Remove Player</string>
+    <string name="player_input_label">Player</string>
+    <string name="player_name">Player</string>
+    <string name="title_activity_add_player">Enter Player Names</string>
+    <string name="dropdown_starter_text">Select a player</string>
+    <string name="no_player_name_provided">No Player Name Provided</string>
+    <string name="no_players_added">No Players Added Yet</string>
+    <string name="players">Players</string>
+
+    <!-- games -->
+
+
+    <string name="new_game">New Game</string>
+    <string name="last_game">Last Game</string>
+    <string name="already_at_earliest">Already At Earliest Game</string>
+    <string name="course_placeholder">No Course Set Yet</string>
+    <string name="delete_game_button">Delete Game</string>
+    <string name="game_deleted">Game Deleted</string>
+    <string name="start_game">Start Game</string>
+    <string name="title_activity_new_game">New Game</string>
+    <string name="new_game_dialog">Start new game?</string>
+
+    <!-- courses -->
+
+    <string name="set_course_name">Enter Course Name</string>
+    <string name="title_activity_set_course_name">Course Name</string>
+    <string name="course_input_label">Course Name</string>
+    <string name="add_course">Add Course</string>
+    <string name="course_not_set">Course Name Not Set</string>
+
+
+
+    <!-- pars -->
+
+    <string name="add_par">Add Par To Course</string>
+    <string name="par">Par</string>
+    <string name="remove_last_par_button">Remove Last Par</string>
+    <string name="par_removed">Removing Last Par</string>
+    <string name="par_added">Par Added</string>
+
+
+
+
+
+
+
+
+    <string name="average">Average</string>
+    <string name="most_throws">Most</string>
+    <string name="least_throws">Least</string>
+
+
+
+
+
+    <string name="over_or_under">Over/Under</string>
+    <string name="date_placeholder">Date</string>
+
+
+
+
+
+
+
+
+
+
+    <string name="error">Sorry, An Error Occurred</string>
+
+
+    <string name="invalid_info">Invalid Info</string>
+
+
+
+
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="cancel">Cancel</string>
+
+
+
+    <string name="cancelled">Cancelled</string>
+    <string name="done">Done</string>
+
+    <string name="saved">Saved</string>
+    <string name="compute_total_button">Total It Up</string>
+</resources>
