@@ -31,13 +31,15 @@ public class DisplayPlayerScores extends Activity {
 		
 		TableRow row = new TableRow(this);
 		
-		row.addView(makeTextView(playerValue));	
-		row.addView(makeTextView(getString(R.string.par)));
-		row.addView(makeTextView(getString(R.string.over_or_under)));
+		row.addView(makeTextView(getString(R.string.scores_for_player) + playerValue));
+
+		//row.addView(makeTextView(getString(R.string.par)));
+		//row.addView(makeTextView(getString(R.string.over_or_under)));
+
 		table.addView(row);
 		
 		int score;
-		int par;
+		//int par;
 
 		
 		for (int i=0; i < scores.size(); i++) {
@@ -46,7 +48,8 @@ public class DisplayPlayerScores extends Activity {
 			row.addView(makeTextView(String.valueOf(score)));
 
 			//add par to the row if it exists
-			
+
+            /*
 			if (i < pars.size()) {
 				par = pars.get(i);
 				row.addView(makeTextView(String.valueOf(par)));
@@ -59,6 +62,7 @@ public class DisplayPlayerScores extends Activity {
 	
 			
 			}
+			*/
 			
 			table.addView(row);
 		}	

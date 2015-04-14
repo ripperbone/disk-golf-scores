@@ -22,6 +22,7 @@
     <string name="see_players_scores">See Player Scores</string>
     <string name="score_too_big">Score Too Big</string>
     <string name="no_score_provided">No Score Provided</string>
+    <string name="scores_for_player">Scores for player: </string>
 
     <!-- players -->
 

@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp" >
+    android:padding="10dp">
 
     <EditText
         android:id="@+id/addPlayerField"
@@ -14,19 +14,22 @@
 
     <Button
         android:id="@+id/addPlayerButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/addPlayerField"
         android:layout_toRightOf="@+id/addPlayerField"
         android:onClick="addPlayer"
-        android:text="@string/add_player_button" />
+        android:text="@string/add_player_button"
+        android:background="@drawable/button_custom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <Spinner
         android:id="@+id/playerInputField"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="50px"
         android:layout_alignLeft="@+id/addPlayerField"
-        android:layout_below="@+id/addPlayerField" />
+        android:layout_below="@+id/addPlayerField"
+        />
 
     <EditText
         android:id="@+id/scoreInputField"
@@ -50,18 +53,18 @@
         android:layout_marginTop="35dp"
         android:onClick="addScore"
         android:text="@string/add_score_button"
-        android:focusable="false" />
+        android:focusable="false"
+        android:background="@drawable/button_custom" />
 
     <Button
         android:id="@+id/newGameButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/displayPlayersScores"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="16dp"
         android:layout_toRightOf="@+id/computeTotalButton"
         android:onClick="newGame"
-        android:text="@string/new_game" />
+        android:text="@string/new_game"
+        android:background="@drawable/button_custom" />
 
     <Button
         android:id="@+id/computeTotalButton"
@@ -71,7 +74,8 @@
         android:layout_alignBottom="@+id/newGameButton"
         android:layout_alignLeft="@+id/scoreInputButton"
         android:onClick="computeTotal"
-        android:text="@string/compute_total_button" />
+        android:text="@string/compute_total_button"
+        android:background="@drawable/button_custom" />
 
     <Button
         android:id="@+id/displayPlayersScores"
@@ -81,6 +85,7 @@
         android:text="@string/see_players_scores"
         android:layout_alignTop="@+id/scoreInputButton"
         android:layout_alignLeft="@+id/newGameButton"
-        android:layout_alignStart="@+id/newGameButton" />
+        android:layout_alignStart="@+id/newGameButton"
+        android:background="@drawable/button_custom" />
 
 </RelativeLayout>
