@@ -15,6 +15,10 @@ import android.widget.TextView;
 
 public class DisplayPlayerScores extends Activity {
 
+    /*
+        Show all the scores for a specified player
+     */
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -22,10 +26,8 @@ public class DisplayPlayerScores extends Activity {
 		Intent intent = getIntent();
 		String playerValue = intent.getStringExtra(MainActivity.CURRENT_PLAYER);
 		ArrayList<Integer> scores = intent.getIntegerArrayListExtra(MainActivity.CURRENT_PLAYER_SCORES);
-		ArrayList<Integer> pars = intent.getIntegerArrayListExtra(MainActivity.PARS);
 		
 		if (scores == null) scores = new ArrayList<Integer>();
-		if (pars == null) pars = new ArrayList<Integer>();
 		
 		TableLayout table = (TableLayout) findViewById(R.id.playerScoresTable);
 		
@@ -33,36 +35,16 @@ public class DisplayPlayerScores extends Activity {
 		
 		row.addView(makeTextView(getString(R.string.scores_for_player) + playerValue));
 
-		//row.addView(makeTextView(getString(R.string.par)));
-		//row.addView(makeTextView(getString(R.string.over_or_under)));
 
 		table.addView(row);
 		
 		int score;
-		//int par;
 
 		
 		for (int i=0; i < scores.size(); i++) {
 			row = new TableRow(this);
 			score = scores.get(i);
 			row.addView(makeTextView(String.valueOf(score)));
-
-			//add par to the row if it exists
-
-            /*
-			if (i < pars.size()) {
-				par = pars.get(i);
-				row.addView(makeTextView(String.valueOf(par)));
-				
-				if (score - par > 0) {
-					row.addView(makeTextView("+" + String.valueOf(score - par)));
-				} else {
-					row.addView(makeTextView(String.valueOf(score - par)));
-				}
-	
-			
-			}
-			*/
 			
 			table.addView(row);
 		}	
@@ -89,6 +71,11 @@ public class DisplayPlayerScores extends Activity {
 	}
 	
 	private TextView makeTextView(String text) {
+
+        /*
+            Create text views with consistent appearance and set the text to the string passed in
+         */
+
 		TextView view = new TextView(this);
 		view.setText(text);
 		view.setTextAppearance(getApplicationContext(), android.R.style.TextAppearance_Large_Inverse);

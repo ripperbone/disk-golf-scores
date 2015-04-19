@@ -37,18 +37,13 @@ public class MainActivity extends Activity {
 	public final static String PLAYERS = "PLAYERS";
 	public final static String CURRENT_PLAYER = "CURRENT_PLAYER";
 	public final static String CURRENT_PLAYER_SCORES = "CURRENT_PLAYER_SCORES";
-	public final static int COURSE_REQUEST_CODE = 1;
-	public final static int PLAYERS_REQUEST_CODE = 2;
-	public final static String PARS = "PARS";
-	
+
 	
 	private String date;
 	private String course;
 	private HashMap<String, ArrayList<Integer>> scores;
 	private ArrayList<String> players;
 	private ArrayAdapter<String> playerChoiceList;
-	private final static String PAR_FILE_PATH = "pars.txt";
-	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +51,11 @@ public class MainActivity extends Activity {
 	
 		setContentView(R.layout.activity_main);
 		
-		
+		/*
 
+		Load info from saved instance. Course isn't used right now but a field to update it might get added in later so I'll leave it.
+
+		 */
 			
 			
 		if (savedInstanceState != null) {
@@ -78,7 +76,10 @@ public class MainActivity extends Activity {
 		if (scores == null) scores = new HashMap<String, ArrayList<Integer>>();
 		
 
-	
+        /*
+            Setup the drop down for choosing player.
+         */
+
 		Spinner spinner = (Spinner) findViewById(R.id.playerInputField);
 		
 		playerChoiceList = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, players);
@@ -112,7 +113,9 @@ public class MainActivity extends Activity {
 	
 	public void addScore(View view) {
 	
-		//Get the score and player information
+		/*
+		    Add a score for the player specified  in the spinner and the score specified in the score input field
+		 */
 		
 		EditText scoreInput = (EditText) findViewById(R.id.scoreInputField);
 		Spinner playerInput = (Spinner) findViewById(R.id.playerInputField);
@@ -142,6 +145,11 @@ public class MainActivity extends Activity {
 	}
 	
 	public void newGame(View view) {
+
+        /*
+            Ask user if they really want to start a new game. If so, reset game details.
+
+         */
 		
 		DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
 			
@@ -149,7 +157,21 @@ public class MainActivity extends Activity {
 			public void onClick(DialogInterface dialog, int choice) {
 				switch(choice) {
 				case DialogInterface.BUTTON_POSITIVE:
-					resetGameDetails();
+
+                    // reset the game details
+
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy", Locale.getDefault());
+                    Calendar cal = Calendar.getInstance();
+                    String todaysDate = dateFormat.format(cal.getTime());
+                    date = todaysDate;
+
+                    course = "";
+                    scores = new HashMap<String, ArrayList<Integer>>();
+                    players = new ArrayList<String>();
+                    playerChoiceList.clear();
+                    playerChoiceList.notifyDataSetChanged();
+
+
 					break;
 				
 				case DialogInterface.BUTTON_NEGATIVE:
@@ -168,27 +190,14 @@ public class MainActivity extends Activity {
 	.show();
 		
 	}
-	
-	private void resetGameDetails() {
-		
-		
-		SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy", Locale.getDefault());
-		Calendar cal = Calendar.getInstance();
-		String todaysDate = dateFormat.format(cal.getTime());
-		date = todaysDate;
-		
-		course = "";
-		scores = new HashMap<String, ArrayList<Integer>>();
-		players = new ArrayList<String>();
-		playerChoiceList.clear();
-		playerChoiceList.notifyDataSetChanged();
-		
-		
-	}
-	
+
 
 	
 	public void computeTotal(View view) {
+
+        /*
+            Start a new activity which will display total scores for each player along with some other statistics.
+         */
 		
 		Intent intent = new Intent(this, DisplayTotalScores.class);
 		intent.putExtra(SCORES, scores);
@@ -197,49 +206,22 @@ public class MainActivity extends Activity {
 	}
 	
 	public void displayPlayerScores(View view) {
+
+        /*
+            Start a new activity to display each individual score for a specified player
+         */
+
 		Spinner playerInput = (Spinner) findViewById(R.id.playerInputField);
 		
 		Object player = playerInput.getSelectedItem();
 		if (player != null) {
 			ArrayList<Integer> playerScores = scores.get(player.toString());
-			
-			ArrayList<Integer> pars = new ArrayList<Integer>();
-			
-			
-			// Find pars for the current course
-			
-			File storage = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-			//File[] files = storage.listFiles();              // check that we can see files
-			File file = new File(storage, PAR_FILE_PATH);
-			BufferedReader reader;
-			
 
-			try {
-				reader = new BufferedReader(new FileReader(file));
-				String line = reader.readLine();
-				
-				while (line != null) {
-					if (line.split(":")[0].equalsIgnoreCase(course)) {
-						String[] parStrings = line.split(":")[1].split(",");
-						for (int i=0; i < parStrings.length; i++) {
-							pars.add(Integer.parseInt(parStrings[i]));
-						}
-					}
-					line = reader.readLine();
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			} 
-			
-			
-			
-			
-			
 			
 			Intent intent = new Intent(this, DisplayPlayerScores.class);
 			intent.putExtra(CURRENT_PLAYER, player.toString());
 			intent.putExtra(CURRENT_PLAYER_SCORES, playerScores);
-			intent.putExtra(PARS, pars);
+
 			startActivity(intent);
 		} else {
 			displayMessage(R.string.no_players_added);
@@ -248,12 +230,23 @@ public class MainActivity extends Activity {
 	
 	
 	private void displayMessage(int message) {
+        /*
+            Show a brief popup informational message
+         */
+
+
 		Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
 		toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
 		toast.show();
 	}
 	
 	protected void onSaveInstanceState(Bundle outState) {
+
+        /*
+            Save information so that it doesn't get wiped out in the middle of a game
+         */
+
+
 		super.onSaveInstanceState(outState);
 		
 		outState.putString(DATE, date);
@@ -265,6 +258,11 @@ public class MainActivity extends Activity {
 	
 	
 	public void addPlayer(View view) {
+
+        /*
+            Add a player to the spinner so that they can be selected during the current game
+
+         */
 		
 		EditText playerInput = (EditText) findViewById(R.id.addPlayerField);
 		String player = playerInput.getText().toString().trim();

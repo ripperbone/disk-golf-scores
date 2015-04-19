@@ -49,27 +49,7 @@
     <string name="title_activity_new_game">New Game</string>
     <string name="new_game_dialog">Start new game?</string>
 
-    <!-- courses -->
-
-    <string name="set_course_name">Enter Course Name</string>
-    <string name="title_activity_set_course_name">Course Name</string>
-    <string name="course_input_label">Course Name</string>
-    <string name="add_course">Add Course</string>
-    <string name="course_not_set">Course Name Not Set</string>
-
-
-
-    <!-- pars -->
-
-    <string name="add_par">Add Par To Course</string>
-    <string name="par">Par</string>
-    <string name="remove_last_par_button">Remove Last Par</string>
-    <string name="par_removed">Removing Last Par</string>
-    <string name="par_added">Par Added</string>
-
-
-
-
+ 
 
 
 

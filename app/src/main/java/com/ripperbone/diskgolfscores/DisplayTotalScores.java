@@ -17,6 +17,9 @@ import android.widget.TextView;
 
 public class DisplayTotalScores extends Activity {
 
+    /*
+        This activity will display total score along with some additional details for each player
+     */
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

@@ -28,21 +28,10 @@
             android:label="@string/title_activity_display_total_scores" >
         </activity>
         <activity
-            android:name=".AddPlayerActivity"
-            android:label="@string/title_activity_add_player"
-            android:parentActivityName=".MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.ripperbone.diskgolfscores.MainActivity" />
-        </activity>
-        <activity
             android:name=".DisplayPlayerScores"
             android:label="@string/title_activity_display_player_scores" >
         </activity>
-        <activity
-            android:name=".SetCourseNameActivity"
-            android:label="@string/title_activity_set_course_name" >
-        </activity>
+
     </application>
 
 </manifest>
