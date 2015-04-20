@@ -32,8 +32,9 @@ public class DisplayPlayerScores extends Activity {
 		TableLayout table = (TableLayout) findViewById(R.id.playerScoresTable);
 		
 		TableRow row = new TableRow(this);
-		
-		row.addView(makeTextView(getString(R.string.scores_for_player) + playerValue));
+
+        row.addView(makeTextView(getString(R.string.hole)));
+		row.addView(makeTextView(playerValue + getString(R.string.scores_for_player)));
 
 
 		table.addView(row);
@@ -44,6 +45,7 @@ public class DisplayPlayerScores extends Activity {
 		for (int i=0; i < scores.size(); i++) {
 			row = new TableRow(this);
 			score = scores.get(i);
+            row.addView(makeTextView(String.valueOf(i + 1)));   // start counting at 1 instead of 0
 			row.addView(makeTextView(String.valueOf(score)));
 			
 			table.addView(row);

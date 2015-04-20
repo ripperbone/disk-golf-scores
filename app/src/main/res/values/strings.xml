@@ -22,7 +22,7 @@
     <string name="see_players_scores">See Player Scores</string>
     <string name="score_too_big">Score Too Big</string>
     <string name="no_score_provided">No Score Provided</string>
-    <string name="scores_for_player">Scores for player: </string>
+    <string name="scores_for_player">\'s scores</string>
 
     <!-- players -->
 
@@ -42,16 +42,19 @@
     <string name="new_game">New Game</string>
     <string name="last_game">Last Game</string>
     <string name="already_at_earliest">Already At Earliest Game</string>
-    <string name="course_placeholder">No Course Set Yet</string>
+    <string name="course_placeholder">Some Disk Golf Course</string>
     <string name="delete_game_button">Delete Game</string>
     <string name="game_deleted">Game Deleted</string>
     <string name="start_game">Start Game</string>
     <string name="title_activity_new_game">New Game</string>
     <string name="new_game_dialog">Start new game?</string>
 
- 
 
 
+
+    <!-- holes-->
+
+    <string name="hole">Hole</string>
 
 
     <string name="average">Average</string>
@@ -68,11 +71,13 @@
 
 
 
+    <!-- settings -->
 
 
-
-
-
+    <string name="pref_save_file_title">Save File</string>
+    <string name="pref_save_file_summary">Save scores to a file on new game</string>
+    <string name="saving_file">Saving Scores File</string>
+    <string name="not_saving_empty_file">Not saving an empty file</string>
 
     <string name="error">Sorry, An Error Occurred</string>
 

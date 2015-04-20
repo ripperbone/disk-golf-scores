@@ -3,20 +3,28 @@ package com.ripperbone.diskgolfscores;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Locale;
+import java.util.Map;
 
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,6 +32,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,7 +46,6 @@ public class MainActivity extends Activity {
 	public final static String PLAYERS = "PLAYERS";
 	public final static String CURRENT_PLAYER = "CURRENT_PLAYER";
 	public final static String CURRENT_PLAYER_SCORES = "CURRENT_PLAYER_SCORES";
-
 	
 	private String date;
 	private String course;
@@ -56,8 +64,7 @@ public class MainActivity extends Activity {
 		Load info from saved instance. Course isn't used right now but a field to update it might get added in later so I'll leave it.
 
 		 */
-			
-			
+
 		if (savedInstanceState != null) {
 			
 			date = savedInstanceState.getString(DATE);
@@ -66,13 +73,13 @@ public class MainActivity extends Activity {
 			players = savedInstanceState.getStringArrayList(PLAYERS);
 		}
 		
-		SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy", Locale.getDefault());
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddhhmmss", Locale.getDefault());
 		Calendar cal = Calendar.getInstance();
 		String todaysDate = dateFormat.format(cal.getTime());
 		
 		if (date == null) date = todaysDate;
 		if (players == null) players = new ArrayList<String>();
-		if (course == null) course = "";
+		if (course == null) course = getString(R.string.course_placeholder);
 		if (scores == null) scores = new HashMap<String, ArrayList<Integer>>();
 		
 
@@ -106,7 +113,15 @@ public class MainActivity extends Activity {
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
-			return true;
+
+            // start Settings activity
+
+
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+
+
+            return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -147,20 +162,95 @@ public class MainActivity extends Activity {
 	public void newGame(View view) {
 
         /*
-            Ask user if they really want to start a new game. If so, reset game details.
+            Ask user if they really want to start a new game. If so, save to file and reset game details.
 
          */
-		
-		DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        final boolean saveFile = prefs.getBoolean("pref_save_file", false);
+
+
+
+        DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int choice) {
 				switch(choice) {
 				case DialogInterface.BUTTON_POSITIVE:
 
+
+                    // check if preference set to save to file
+
+
+
+                    if (saveFile) {
+
+
+                        // save to file
+
+                        String state = Environment.getExternalStorageState();
+
+
+                        // if nothing added to scores yet, don't save a blank file
+
+                        if (scores.size() == 0) {
+                            displayMessage(R.string.not_saving_empty_file);
+
+                        } else {
+
+
+                            // check if we are in a state where media is inaccessible
+
+                            if (!state.equals(Environment.MEDIA_BAD_REMOVAL) && !state.equals(Environment.MEDIA_MOUNTED_READ_ONLY) && !state.equals(Environment.MEDIA_UNMOUNTED)) {
+
+
+                                // let the user know that the scores are being saved
+
+                                displayMessage(R.string.saving_file);
+
+
+                                File storage = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
+
+                                File scoresFile = new File(storage, "scores_" + date + ".txt");
+
+
+                                try {
+                                    FileOutputStream out = new FileOutputStream(scoresFile);
+                                    PrintWriter writer = new PrintWriter(out);
+
+
+                                    Iterator<HashMap.Entry<String, ArrayList<Integer>>> iterator = scores.entrySet().iterator();
+                                    ArrayList<Integer> playerScores;
+                                    String playerName;
+
+                                    // iterate through player scores and add to the file
+
+                                    while (iterator.hasNext()) {
+
+                                        HashMap.Entry<String, ArrayList<Integer>> entry = iterator.next();
+                                        playerScores = entry.getValue();
+                                        playerName = entry.getKey();
+
+
+                                        writer.println(playerName + ": " + playerScores.toString());
+                                        writer.flush();
+                                    }
+                                    writer.close();
+                                    out.close();
+
+                                } catch (IOException ex) {
+                                    ex.printStackTrace();
+                                }
+                            }
+
+                        }
+                    }
+
+
                     // reset the game details
 
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy", Locale.getDefault());
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddhhmmss", Locale.getDefault());
                     Calendar cal = Calendar.getInstance();
                     String todaysDate = dateFormat.format(cal.getTime());
                     date = todaysDate;
@@ -190,6 +280,9 @@ public class MainActivity extends Activity {
 	.show();
 		
 	}
+
+
+
 
 
 	
