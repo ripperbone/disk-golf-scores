@@ -136,10 +136,8 @@ public class DisplayTotalScores extends Activity {
 	}
 	
 	private int getHighestScore(ArrayList<Integer> scores) {
-		int ret = scores.get(0);
 		Iterator<Integer> iter = scores.iterator();
-		// skip first element
-		iter.next();
+		int ret = iter.next();
 		while (iter.hasNext()) {
 			int score = iter.next();
 			if (score > ret) ret = score;
@@ -149,10 +147,8 @@ public class DisplayTotalScores extends Activity {
 	}
 	
 	private int getLowestScore(ArrayList<Integer> scores) {
-		int ret = scores.get(0);
 		Iterator<Integer> iter = scores.iterator();
-		// skip first element
-		iter.next();
+		int ret = iter.next();
 		while (iter.hasNext()) {
 			int score = iter.next();
 			if (score < ret) ret = score;
